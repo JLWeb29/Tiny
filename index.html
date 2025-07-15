@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Tiny du Ponant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Styles pour le modal qui nécessitent un peu de CSS personnalisé */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content img {
+            max-height: 80vh;
+            max-width: 90vw;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .modal-nav button {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .modal-nav button:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 font-sans text-gray-800">
+    <header class="bg-green-800 text-white py-8 px-4 text-center">
+        <h1 class="text-4xl font-bold">La Tiny du Ponant</h1>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 max-w-6xl">
+        <section class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h3 class="text-2xl font-bold text-green-700 mb-4">Prêt pour une Nouvelle Aventure ?</h3>
+            <p class="text-lg leading-relaxed mb-4">
+                Découvrez notre Tiny House moderne et entièrement équipée, construite en 2023 par des experts de la
+                région Nantaise.
+                Idéale pour un mode de vie minimaliste et mobile, elle offre tout le confort nécessaire dans un espace
+                optimisé.
+            </p>
+            <p class="text-lg leading-relaxed mb-4">
+                Imaginez la liberté de vivre où vous le souhaitez, tout en réduisant votre empreinte écologique.
+            </p>
+            <p class="text-lg leading-relaxed mb-4">
+                Ne manquez pas cette opportunité unique de changer de vie et de vous offrir la liberté d'une Tiny House.
+            </p>
+            <p class="text-lg font-semibold text-green-700">
+                Parcourez dès aujourd'hui la gallerie photos et la fiche technique de la Tiny !
+            </p>
+        </section>
+
+        <section class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-3xl font-bold text-green-700 mb-4">Galerie de Photos</h2>
+            <p class="text-gray-600 mb-6">Cliquez sur une photo pour l'agrandir.</p>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="photoGallery">
+                <!-- Les images seront ajoutées dynamiquement par JavaScript -->
+            </div>
+
+            <!-- Modal pour les images agrandies -->
+            <div id="imageModal" class="modal">
+                <span class="close-modal">&times;</span>
+                <div class="modal-nav">
+                    <button id="prevImage">&lt;</button>
+                    <button id="nextImage">&gt;</button>
+                </div>
+                <div class="modal-content">
+                    <img id="expandedImage" src="" alt="Image agrandie" class="mx-auto">
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Plan -->
+        <section class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-3xl font-bold text-green-700 mb-4">Plan de la Tiny House</h2>
+            <p class="text-gray-600 mb-6">Cliquez sur le plan pour l'agrandir.</p>
+
+            <div class="pdf-container h-96 mb-4">
+                <embed src="SRC/plan.pdf" type="application/pdf" class="w-full h-full">
+            </div>
+
+            <!-- Lien de téléchargement optionnel -->
+            <a href="SRC/plan.pdf" download
+                class="inline-block bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded transition duration-300">
+                Télécharger le PDF technique
+            </a>
+        </section>
+
+        <section class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-3xl font-bold text-green-700 mb-6 text-center">Caractéristiques Techniques</h2>
+            <p class="text-xl text-gray-600 mb-8 text-center">Ici sont repris les différents éléments techniques qui
+                composent la Tiny et ce pièce par pièce.</p>
+            <div class="space-y-8">
+                <div>
+                    <h3 class="text-2xl font-semibold text-green-600 mb-3">Cuisine</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>1 plaque double feux gaz</li>
+                        <li>1 réfrigérateur table top de 91 litres</li>
+                        <li>Plan de travail en tripli épicéa 27mm</li>
+                        <li>Évier noir avec égouttoir et mitigeur col de cygne</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold text-green-600 mb-3">Mezzanines</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Mezzanine chambre avec lit en 160x200 et rangements muraux</li>
+                        <li>Mezzanine Bureau avec rangements, tablette ordinateur intégrée et connectique</li>
+                        <li>Zone filet pour se détendre</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold text-green-600 mb-3">Salon</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Banquette mobile double face</li>
+                        <li>2 tables rabattables de 90 cm x 60 cm</li>
+                        <li>Zone pour poêle à bois future</li>
+                        <li>Escalier escamotable avec rangements intégrés</li>
+                        <li>Rangements divers</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold text-green-600 mb-3">Salle d'eau</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Receveur en acrylique 80 x 80cm</li>
+                        <li>Porte en verre sérigraphiée de 6mm</li>
+                        <li>Vasque lavabo 60cm</li>
+                        <li>Meuble de rangement 2 portes</li>
+                        <li>Toilettes sèches avec rangement copeaux bois</li>
+                        <li>Extracteur d'air VMC</li>
+                        <li>Ballon d'eau chaude de 100 litres</li>
+                        <li>Sèche-serviettes de 500W</li>
+                        <li>Chaudière gaz</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold text-green-600 mb-3">Divers</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Bardage en Douglas Pré vieilli patiné</li>
+                        <li>Toiture en Mauka Line Gris London nervuré (45cm)</li>
+                        <li>Remorque Jaunin 7m20 x 2m55m en double essieux</li>
+                        <li>4 béquilles renforcées</li>
+                        <li>Menuiseries PVC en gris anthracite</li>
+                        <li>Menuiseries avec double vitrage 4/16/4mm argon</li>
+                        <li>Éclairage LED</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-3xl font-bold text-green-700 mb-4">Détails techniques du constructeur</h2>
+            <p class="text-gray-600 mb-6">Document technique fourni par le fabricant</p>
+
+            <div class="pdf-container h-96 mb-4">
+                <embed src="SRC/FicheTechniqueConstructeur.pdf" type="application/pdf" class="w-full h-full">
+            </div>
+
+            <!-- Lien de téléchargement optionnel -->
+            <a href="SRC/FicheTechniqueConstructeur.pdf" download
+                class="inline-block bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded transition duration-300">
+                Télécharger le PDF technique
+            </a>
+        </section>
+
+        <!-- Section Contact -->
+        <section class="bg-white rounded-lg shadow-md p-6 mb-8 text-center">
+            <h2 class="text-3xl font-bold text-green-700 mb-4">Contact</h2>
+            <p class="text-lg mb-6">Si vous avez des questions ou souhaitez me contacter, je reste à votre disposition
+                par le biais de ce
+                formulaire</p>
+            <button onclick="window.location.href='mailto:TinyDeJeremy@proton.me?subject=Contact&body=Bonjour,'"
+                class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition duration-300">
+                Nous contacter
+            </button>
+        </section>
+    </main>
+
+    <footer class="bg-green-800 text-white py-6 text-center">
+        <p>&copy; 2025 La Tiny du Ponant. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Liste des images de la galerie
+            const images = [
+                "SRC/Photos/IMG_9500.jpg",
+                "SRC/Photos/IMG_9516.jpg",
+                "SRC/Photos/IMG_9520.jpg",
+                "SRC/Photos/IMG_9526.jpg",
+                "SRC/Photos/IMG_9534.jpg",
+                "SRC/Photos/IMG_9537.jpg",
+                "SRC/Photos/IMG_9556.jpg",
+                "SRC/Photos/IMG_9562.jpg",
+                "SRC/Photos/IMG_9589.jpg",
+                "SRC/Photos/IMG_9593.jpg",
+                "SRC/Photos/IMG_9603.jpg",
+                "SRC/Photos/IMG_9609.jpg",
+                "SRC/Photos/IMG_9611.jpg",
+                "SRC/Photos/IMG_9620.jpg",
+                "SRC/Photos/IMG_9621.jpg",
+                "SRC/Photos/IMG_9624.jpg",
+                "SRC/Photos/IMG_9627.jpg",
+                "SRC/Photos/IMG_9631.jpg",
+                "SRC/Photos/IMG_9637.jpg",
+                "SRC/Photos/IMG_9639.jpg",
+                "SRC/Photos/IMG_9640.jpg",
+                "SRC/Photos/IMG_9641.jpg",
+                "SRC/Photos/IMG_9656.jpg",
+                "SRC/Photos/IMG_9657.jpg",
+                "SRC/Photos/IMG_9659.jpg",
+                "SRC/Photos/IMG_9664.jpg",
+                "SRC/Photos/IMG_9666.jpg",
+                "SRC/Photos/IMG_9670.jpg",
+                "SRC/Photos/IMG_9685.jpg",
+                "SRC/Photos/IMG_20231220_101444663_HDR.jpg",
+                "SRC/Photos/IMG_20231220_120438824_HDR.jpg",
+                "SRC/Photos/IMG_20231220_120453403_HDR.jpg",
+                "SRC/Photos/IMG_20231220_120456353_HDR.jpg",
+                "SRC/Photos/IMG_20231220_120516586_HDR.jpg",
+                "SRC/Photos/IMG_20231220_120537116_HDR.jpg",
+                "SRC/Photos/IMG_20231220_120541188_HDR.jpg",
+                "SRC/Photos/IMG_20231220_120549001_HDR.jpg"
+            ];
+
+            const gallery = document.getElementById('photoGallery');
+            const modal = document.getElementById('imageModal');
+            const expandedImg = document.getElementById('expandedImage');
+            const closeModal = document.querySelector('.close-modal');
+            const prevBtn = document.getElementById('prevImage');
+            const nextBtn = document.getElementById('nextImage');
+
+            let currentImageIndex = 0;
+
+            // Création de la galerie
+            images.forEach((src, index) => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = `Photo ${index + 1}`;
+                img.loading = "lazy";
+                img.className = 'w-full h-48 object-cover rounded-lg cursor-pointer hover:opacity-90 transition';
+
+                img.addEventListener('click', () => {
+                    currentImageIndex = index;
+                    openModal(src);
+                });
+
+                galleryItem.appendChild(img);
+                gallery.appendChild(galleryItem);
+            });
+
+            // Fonctions pour le modal
+            function openModal(src) {
+                expandedImg.src = src;
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeImageModal() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+
+            function navigate(direction) {
+                currentImageIndex += direction;
+
+                if (currentImageIndex < 0) {
+                    currentImageIndex = images.length - 1;
+                } else if (currentImageIndex >= images.length) {
+                    currentImageIndex = 0;
+                }
+
+                expandedImg.src = images[currentImageIndex];
+            }
+
+            // Événements
+            closeModal.addEventListener('click', closeImageModal);
+            prevBtn.addEventListener('click', () => navigate(-1));
+            nextBtn.addEventListener('click', () => navigate(1));
+
+            // Fermer en cliquant en dehors de l'image
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeImageModal();
+                }
+            });
+
+            // Navigation au clavier
+            document.addEventListener('keydown', (e) => {
+                if (modal.style.display === 'flex') {
+                    if (e.key === 'Escape') closeImageModal();
+                    if (e.key === 'ArrowLeft') navigate(-1);
+                    if (e.key === 'ArrowRight') navigate(1);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
